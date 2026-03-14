@@ -2,10 +2,16 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**"
+      ]
     },
     "start:dev": {
+      "dependsOn": ["generate"],
       "cache": false,
       "persistent": true
     },
@@ -14,7 +20,22 @@
       "persistent": true
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
+    },
+    "generate:spec": {
+      "outputs": [
+        "generated/openapi.json"
+      ]
+    },
+    "generate": {
+      "dependsOn": [
+        "api#generate:spec"
+      ],
+      "outputs": [
+        "src/generated/**"
+      ]
     }
   }
 }
