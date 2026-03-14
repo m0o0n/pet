@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "turbo run dev",
-    "build": "turbo run build",
+    "dev": "next dev",
+    "start:dev": "next dev",
+    "build": "next build",
     "lint": "biome lint .",
     "format": "biome format . --write",
     "check": "biome check . --write"
