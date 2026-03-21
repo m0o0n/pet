@@ -6,9 +6,12 @@
       "outputs": ["dist/**", ".next/**"]
     },
     "start:dev": {
-      "dependsOn": ["generate"],
+      "dependsOn": ["generate", "api#generate:prisma"],
       "cache": false,
       "persistent": true
+    },
+    "generate:prisma": {
+      "outputs": ["prisma/generated/**"]
     },
     "dev": {
       "cache": false,
@@ -21,7 +24,7 @@
       "outputs": ["generated/openapi.json"]
     },
     "generate": {
-      "dependsOn": ["api#generate:spec"],
+      "dependsOn": ["api#generate:prisma", "api#generate:spec"],
       "outputs": ["src/generated/**"]
     }
   }
