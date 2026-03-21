@@ -8,7 +8,8 @@ datasource db {
 }
 
 model Todo {
-  id        String  @id @default(uuid())
-  title     String
-  completed Boolean @default(false)
+  id          String  @id @default(uuid())
+  title       String
+  completed   Boolean @default(false)
+  description String?
 }
