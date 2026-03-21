@@ -1,7 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { TodoService } from './todo.service';
-import { Todo } from './todo.entity';
+import { Controller, Get } from '@nestjs/common'
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { TodoService } from './todo.service'
+import { Todo } from './todo.entity'
 
 @ApiTags('todos')
 @Controller('todos')
@@ -11,6 +11,6 @@ export class TodoController {
   @Get()
   @ApiOkResponse({ type: Todo, isArray: true })
   findAll(): Todo[] {
-    return this.todoService.findAll();
+    return this.todoService.findAll()
   }
 }

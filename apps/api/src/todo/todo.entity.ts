@@ -1,12 +1,12 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger'
 
 export class Todo {
   @ApiProperty()
-  id: number;
+  id: number
 
   @ApiProperty()
-  title: string;
+  title: string
 
   @ApiProperty()
-  completed: boolean;
+  completed: boolean
 }

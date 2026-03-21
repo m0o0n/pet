@@ -1,25 +1,25 @@
-import axios, { type AxiosError } from "axios";
+import axios, { type AxiosError } from 'axios'
 
 export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: { "Content-Type": "application/json" },
-});
+  headers: { 'Content-Type': 'application/json' },
+})
 
-export type ApiFetcherExtraProps = {};
+export type ApiFetcherExtraProps = {}
 
 export type ErrorWrapper<TError> =
   | TError
-  | { status: "unknown"; payload: string };
+  | { status: 'unknown'; payload: string }
 
 export type ApiFetcherOptions<TBody, THeaders, TQueryParams, TPathParams> = {
-  url: string;
-  method: string;
-  body?: TBody;
-  headers?: THeaders;
-  queryParams?: TQueryParams;
-  pathParams?: TPathParams;
-  signal?: AbortSignal;
-} & ApiFetcherExtraProps;
+  url: string
+  method: string
+  body?: TBody
+  headers?: THeaders
+  queryParams?: TQueryParams
+  pathParams?: TPathParams
+  signal?: AbortSignal
+} & ApiFetcherExtraProps
 
 export async function apiFetch<
   TData,
@@ -36,7 +36,12 @@ export async function apiFetch<
   pathParams,
   queryParams,
   signal,
-}: ApiFetcherOptions<TBody, THeaders, TQueryParams, TPathParams>): Promise<TData> {
+}: ApiFetcherOptions<
+  TBody,
+  THeaders,
+  TQueryParams,
+  TPathParams
+>): Promise<TData> {
   try {
     const { data } = await apiClient.request<TData>({
       url: resolveUrl(url, pathParams as Record<string, string>),
@@ -45,19 +50,19 @@ export async function apiFetch<
       params: queryParams,
       headers: headers as Record<string, string>,
       signal,
-    });
-    return data;
+    })
+    return data
   } catch (e) {
-    const axiosError = e as AxiosError<TError>;
+    const axiosError = e as AxiosError<TError>
     if (axiosError.response) {
-      throw axiosError.response.data;
+      throw axiosError.response.data
     }
     throw {
-      status: "unknown",
-      payload: axiosError.message ?? "Network error",
-    } satisfies ErrorWrapper<TError>;
+      status: 'unknown',
+      payload: axiosError.message ?? 'Network error',
+    } satisfies ErrorWrapper<TError>
   }
 }
 
 const resolveUrl = (url: string, pathParams: Record<string, string> = {}) =>
-  url.replace(/\{\w*\}/g, (key) => pathParams[key.slice(1, -1)] ?? "");
+  url.replace(/\{\w*\}/g, (key) => pathParams[key.slice(1, -1)] ?? '')

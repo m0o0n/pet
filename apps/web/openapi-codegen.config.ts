@@ -1,9 +1,9 @@
-import { defineConfig } from '@openapi-codegen/cli';
+import { defineConfig } from '@openapi-codegen/cli'
 import {
   generateFetchers,
   generateReactQueryComponents,
-  generateSchemaTypes
-} from '@openapi-codegen/typescript';
+  generateSchemaTypes,
+} from '@openapi-codegen/typescript'
 
 export default defineConfig({
   apiTypes: {
@@ -13,16 +13,16 @@ export default defineConfig({
     },
     outputDir: 'src/generated/api',
     to: async (context) => {
-      const filenamePrefix = "api";
+      const filenamePrefix = 'api'
       const { schemasFiles } = await generateSchemaTypes(context, {
         filenamePrefix,
-      });
+      })
 
       await generateReactQueryComponents(context, {
         schemasFiles,
         filenamePrefix,
         filenameCase: 'kebab',
-      });
+      })
     },
   },
-});
+})
