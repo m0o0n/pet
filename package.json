@@ -23,6 +23,7 @@
     "start:dev": "turbo run start:dev",
     "generate": "turbo run generate --filter=web",
     "format": "biome format --write .",
-    "check": "biome check --write ."
+    "check": "biome check --write .",
+    "deploy:production": "bash scripts/deploy.sh"
   }
 }
