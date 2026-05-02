@@ -54,3 +54,13 @@ output "app_api_url" {
   value       = "http://${aws_instance.app.public_ip}:8080"
   description = "NestJS API URL"
 }
+
+output "ci_public_ip" {
+  value       = aws_instance.ci.public_ip
+  description = "Woodpecker CI public IP"
+}
+
+output "ci_url" {
+  value       = "http://${aws_instance.ci.public_ip}:8000"
+  description = "Woodpecker CI URL"
+}

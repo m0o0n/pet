@@ -26,3 +26,9 @@ variable "allowed_ssh_ips" {
   description = "CIDR blocks allowed to SSH into EC2"
   type        = list(string)
 }
+
+variable "woodpecker_github_secret" {
+  description = "GitHub OAuth App client secret for Woodpecker CI"
+  type        = string
+  sensitive   = true
+}
