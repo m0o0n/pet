@@ -39,3 +39,10 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 # generated
 generated/
 apps/web/src/generated/
+
+# terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example

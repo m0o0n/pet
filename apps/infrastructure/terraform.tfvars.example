@@ -1,0 +1,8 @@
+# Copy to terraform.tfvars and fill in real values.
+# terraform.tfvars is gitignored — secrets stay out of the repo.
+
+db_password    = "change-me-to-strong-password"
+allowed_db_ips = ["195.64.239.243/32"]
+
+ssh_public_key  = "ssh-ed25519 AAAA... your-public-key"
+allowed_ssh_ips = ["195.64.239.243/32"]
