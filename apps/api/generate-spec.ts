@@ -1,7 +1,7 @@
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
 import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
-import { existsSync, mkdirSync, writeFileSync } from 'fs'
-import { dirname, join } from 'path'
 import { AppModule } from './src/app.module'
 
 async function generate() {
