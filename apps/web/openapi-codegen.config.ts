@@ -1,6 +1,5 @@
 import { defineConfig } from '@openapi-codegen/cli'
 import {
-  generateFetchers,
   generateReactQueryComponents,
   generateSchemaTypes,
 } from '@openapi-codegen/typescript'
