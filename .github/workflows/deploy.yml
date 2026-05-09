@@ -29,6 +29,18 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Get runner public IP
+        id: ip
+        run: echo "addr=$(curl -sf https://checkip.amazonaws.com)" >> $GITHUB_OUTPUT
+
+      - name: Allow runner IP in EC2 security group
+        run: |
+          aws ec2 authorize-security-group-ingress \
+            --group-id ${{ vars.EC2_SG_ID }} \
+            --protocol tcp \
+            --port 22 \
+            --cidr ${{ steps.ip.outputs.addr }}/32
+
       - name: Login to ECR
         uses: aws-actions/amazon-ecr-login@v2
 
@@ -46,18 +58,6 @@ jobs:
             -t ${{ vars.ECR_REGISTRY }}/pet-project-web:latest \
             .
           docker push ${{ vars.ECR_REGISTRY }}/pet-project-web:latest
-
-      - name: Get runner public IP
-        id: ip
-        run: echo "addr=$(curl -sf https://checkip.amazonaws.com)" >> $GITHUB_OUTPUT
-
-      - name: Allow runner IP in EC2 security group
-        run: |
-          aws ec2 authorize-security-group-ingress \
-            --group-id ${{ vars.EC2_SG_ID }} \
-            --protocol tcp \
-            --port 22 \
-            --cidr ${{ steps.ip.outputs.addr }}/32
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1
