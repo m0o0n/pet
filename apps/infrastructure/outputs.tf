@@ -54,3 +54,18 @@ output "app_api_url" {
   value       = "http://${aws_instance.app.public_ip}:8080"
   description = "NestJS API URL"
 }
+
+output "ecr_registry" {
+  value       = split("/", aws_ecr_repository.api.repository_url)[0]
+  description = "ECR registry hostname — add to GitHub variable ECR_REGISTRY"
+}
+
+output "ec2_security_group_id" {
+  value       = aws_security_group.ec2.id
+  description = "EC2 security group ID — add to GitHub variable EC2_SG_ID"
+}
+
+output "github_actions_role_arn" {
+  value       = aws_iam_role.github_actions.arn
+  description = "IAM role for GitHub Actions OIDC — add to GitHub secret AWS_ROLE_ARN"
+}
