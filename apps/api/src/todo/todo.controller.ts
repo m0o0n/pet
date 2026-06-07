@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common'
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { Todo } from './todo.entity'
-import type { TodoService } from './todo.service'
+import { TodoService } from './todo.service'
 
 @ApiTags('todos')
 @Controller('todos')

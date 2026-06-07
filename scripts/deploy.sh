@@ -29,7 +29,13 @@ docker push "$ECR_WEB:latest"
 
 echo "Deploying to EC2..."
 ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no ubuntu@"$EC2_IP" \
+  "sudo mkdir -p /opt/app && sudo chown ubuntu:ubuntu /opt/app"
+
+scp -i "$SSH_KEY" -o StrictHostKeyChecking=no \
+  docker-compose.prod.yml ubuntu@"$EC2_IP":/opt/app/docker-compose.yml
+
+ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no ubuntu@"$EC2_IP" \
   "aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY \
-   && cd /opt/app && sudo docker compose pull && sudo docker compose up -d"
+   && cd /opt/app && docker compose pull && docker compose up -d"
 
 echo "Done. App is available at http://$EC2_IP:3000"
